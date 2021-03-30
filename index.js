@@ -1,11 +1,25 @@
+const config = require('./common/config/env.config.js');
+
 const express = require('express');
 const app = express();
-const port = 8080;
+const bodyParser = require('body-parser');
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
+const UsersRouter = require('./users/routes.config.js');
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Expose-Headers', 'Content-Length');
+    res.header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, Range');
+
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
+    else return next();
 });
 
-app.listen(port, () => {
-    console.log(`Secure API running on port ${port}`);
+app.use(bodyParser.json());
+UsersRouter.routesConfig(app);
+
+app.listen(config.PORT, () => {
+    console.log('Secure API running on port %s', config.PORT);
 });
