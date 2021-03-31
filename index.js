@@ -20,6 +20,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 UsersRouter.routesConfig(app);
 
-app.listen(config.PORT, () => {
-    console.log('Secure API running on port %s', config.PORT);
+app.listen(config.port, () => {
+    console.log('Secure API running on port %s', config.port);
 });

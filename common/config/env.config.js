@@ -1,5 +1,5 @@
 module.exports = {
-    PORT: 8080,
+    port: 8080,
     appEndpoint: 'http://localhost:8080',
     apiEndpoint: 'http://localhost:8080',
     environment: 'dev',
